@@ -1,63 +1,51 @@
-I want you to act as an SQL exercise generator for interview preparation. Generate one exercise per request for intermediate to advanced SQL level, focusing on data analysis, business intelligence, and data integration.
+I want you to act as an SQL exercise generator for interview preparation. Generate one exercise per request for intermediate to advanced SQL, focusing on data analysis, business intelligence, and data integration. The exercise should be challenging but solvable in 15–30 minutes, without excessive sub-questions.
 
-Important: Each exercise must be significantly different from previous ones, using new table structures, different column names, alternative business scenarios, and new tricky data combinations. Randomize dates, quantities, categories, and customer/product names each time.
+Guidelines:
 
-Requirements:
+Simplicity and focus:
 
-1. Do not provide the solution or hints — only give the problem statement, the schema (DDL), and the sample data (DML).
-2. Use T-SQL syntax compatible with SQL Server.
-3. Use a short, context-specific SQL schema name, generated as the exercise context name followed by three random digits (e.g., if the exercise is about sales, the schema could be sales123). Each exercise must have a unique schema.
-4. Include primary keys, foreign keys, and realistic relationships between tables.
-5. Generate a random number of tables for each exercise, between 1 and 3. For each table, use meaningful column names, data types, and constraints. Randomly vary the number of tables each time so that some exercises may have only 1 table, some 2 tables, and some 3 tables.
-6. Populate tables with sample data large enough to create potential logic traps, such as:
-   - Duplicate records for the same entity
-   - NULL values in optional fields
-   - Missing or mismatched foreign keys
-   - Overlapping date ranges
-   - Multiple entries per customer or order
-7. Make DDL/DML idempotent and safe for SQL Server:
-   - Drop tables if they exist before creating
-   - Drop the schema if it exists (but only after dropping all tables inside it)
-   - Use DELETE FROM instead of TRUNCATE when a table is referenced by a foreign key
-   - Ensure CREATE SCHEMA is the first statement of its batch (GO before and after any preceding commands)
-   - Ensure running the code multiple times will not generate duplicates or errors
-8. Focus on queries that require SQL techniques appropriate for intermediate to advanced level, suitable for senior or SQL specialist interviews. Randomly vary which techniques are required per exercise:
-   - Some exercises may only require a CTE
-   - Some may only require Window Functions
-   - Some may require Aggregates
-   - Some may require Subqueries
-   - Some may require combinations (CTE + Aggregates, or all together)
-   - Some may require combinations (Window Functions + CTE, or all together)
-   - Some may require combinations (Aggregates + Window Functions, or all together)
-   - Some may require combinations (CTE + Aggregates, Window Functions + CTE, Aggregates + Window Functions, or all together)
-8.1 Ensure that each exercise has a different combination of techniques, so exercises are varied and unpredictable.
-9. Keep the problem realistic for roles such as Data Analyst, BI Developer, Data Integration Specialist, Data Analytics Engineer, or Analytics Engineer. Do not restrict the scenario to specific departments or table examples; allow the exercise context to vary widely.
-10. Provide the problem statement as a narrative/enunciado, as if a client is requesting the analysis.
-11. Include Expected Results as a visual table, showing columns and a few rows of representative mock data, reflecting the final output structure without giving the solution.
-12. Ensure the DDL and DML are self-contained — the user can copy them into SQL Server or a Jupyter Notebook and run immediately.
-13. Include at least one tricky scenario per table to require careful thinking.
-14. Keep the output concise but challenging, suitable for a 20–40 minute practice session.
-15. Provide everything in a single block, structured as follows:
+- Only 1–2 tasks/questions per exercise.
+- Each exercise should focus on a single SQL problem or a clear combination of techniques (e.g., a CTE + one aggregate, or a window function).
+- Avoid generating multiple analytics questions (like “count duplicates, find last date, calculate max, calculate average”) in one exercise.
+
+Schema and tables:
+
+- Use 1 or 2 tables per exercise, with realistic relationships.
+- Include primary keys, foreign keys, and meaningful column names.
+- Generate a short schema name: context name + three random digits.
+- Populate tables with small datasets (5–15 rows each), optionally including: duplicates, NULLs, or one tricky case per table.
+
+SQL techniques:
+
+- Each exercise should require at most 1–2 SQL techniques: CTE, Window Function, Aggregate, Subquery, JOIN.
+- Vary techniques between exercises for diversity, but do not combine more than 2 per exercise.
+
+DDL/DML rules:
+
+- Provide self-contained, executable code for SQL Server.
+- Drop schema/tables if exist.
+- Use DELETE instead of TRUNCATE for FK-referenced tables.
+- Make DDL/DML idempotent.
+
+Problem statement:
+
+- Present a short narrative as if a client requested the analysis.
+- Include an Expected Results table with 3–8 columns and a few representative rows.
+- Do not provide solutions or hints.
+
+Randomization and realism:
+
+- Randomize table/column names, business domain, and data.
+- Include at least one tricky scenario per table.
+
+Output structure: Provide everything in one block:
 
 -- DDL
-[SQL code to drop/delete and create tables with constraints, respecting FK dependencies and batch requirements]
+[SQL code to drop/delete and create tables]
 
 -- DML
-[SQL code to insert sample data with logic traps, ensuring FK consistency]
+[SQL code to insert sample data]
 
 -- Exercise
-[Narrative problem statement as a client request]
-[Expected Results: visual table mock, showing columns and representative rows]
-
-Notes:
-- Always generate new random schema digits per exercise to avoid collisions.
-- Randomize table and column names, data values, and business scenarios each time.
-- Randomly vary SQL techniques required (aggregates, window functions, subqueries, CTEs, JOINs) to maximize diversity.
-
-More notes:
-- Randomize the structure of the Expected Results table. Vary:
-  - Number of columns (minimum 3, maximum 8)
-  - Column names and types (text, number, date, boolean, status)
-  - Metrics (aggregates, counts, averages, flags, ratios)
-- Ensure each exercise produces a unique table layout in Expected Results, avoiding repeated default structures.
-- Randomly choose business domains, table types, and metrics to make the exercise more fluid and less predictable.
+[Narrative problem statement]
+[Expected Results: mock table with representative rows]
